@@ -16,20 +16,7 @@
     <language>es</language>
     <platform>all</platform>
     <license>GPL-3.0-or-later</license>
-    <news>1.6.0: al iniciar comprueba su versión y su integridad contra GitHub (pide actualizar, reinstalar o conexión a internet).
-1.5.0: aviso legal al abrir por primera vez; tipo «alfa»; se verifica el checksum (md5/sha256) de los índices de los repositorios; zips de repositorio con {version}.
-1.4.0: al desinstalar pregunta si guardar copia y si quitar las dependencias que se instalaron con el addon; nuevo administrador de copias de seguridad.
-1.3.1: la versión de los addons ya no hace falta en la lista; se detecta del addon.xml, del zip o del repositorio.
-1.3.0: ya no hace falta el sha256 en la lista; Forja busca la huella publicada junto al zip y verifica con ella.
-1.2.9: los repositorios http ya no se bloquean; se avisa antes de instalar y se puede continuar.
-1.2.8: al instalar un addon se muestra la lista de todas sus dependencias y se instalan todas de golpe.
-1.2.7: al pinchar un addon se pasa al panel lateral para usar el botón de instalar, y la descripción sale del addon.xml de cada addon.
-1.2.6: corregido el error al instalar («Kodi no ha reconocido el addon») y la forma de los botones.
-1.2.5: compatible con Kodi 19 (Matrix), 20 (Nexus), 21 (Omega) y 22.
-1.2.4: textos simplificados.
-1.2.3: logo en la cabecera, ajustes de segundo plano y aviso para repositorios http.
-1.2.2: nuevo diseño, actualización automática de Forja, botón Actualizar todo y mejor gestión de dependencias.
-1.2.1: la lista por defecto se descarga de internet.
+    <news>
 1.0.0: primera versión.</news>
     <assets>
       <icon>icon.png</icon>
