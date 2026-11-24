@@ -1,0 +1,29 @@
+{
+  "esquema": 1,
+  "id": "defecto",
+  "nombre": "Lista por defecto",
+  "descripcion": "Lista por defecto.",
+  "autor": "Forja",
+  "version": "1.2.4",
+  "actualizado": "2026-11-23",
+  "categorias": [
+    {
+      "id": "otros",
+      "nombre": "Otros"
+    }
+  ],
+  "addons": [
+    {
+      "id": "plugin.video.ejemplo",
+      "nombre": "Addon de ejemplo",
+      "descripcion": "Marcador de posición: no se pudo descargar la lista.",
+      "autor": "Forja",
+      "categoria": "otros",
+      "tipo": "kodi",
+      "etiquetas": [
+        "ejemplo"
+      ]
+    }
+  ],
+  "packs": []
+}

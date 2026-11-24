@@ -1,0 +1,180 @@
+# Forja - cadenas de los ajustes
+msgid ""
+msgstr ""
+"Project-Id-Version: script.forja 1.0.0\n"
+"Language: en_GB\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+msgctxt "#30000"
+msgid "General"
+msgstr ""
+
+msgctxt "#30001"
+msgid "Appearance and behaviour"
+msgstr ""
+
+msgctxt "#30002"
+msgid "Lists and updates"
+msgstr ""
+
+msgctxt "#30003"
+msgid "Security"
+msgstr ""
+
+msgctxt "#30004"
+msgid "Downloads and installation"
+msgstr ""
+
+msgctxt "#30005"
+msgid "Maintenance"
+msgstr ""
+
+msgctxt "#30006"
+msgid "Tools"
+msgstr ""
+
+msgctxt "#30010"
+msgid "Interface"
+msgstr ""
+
+msgctxt "#30011"
+msgid "Modern: full screen. Classic: dialogs."
+msgstr ""
+
+msgctxt "#30012"
+msgid "Modern"
+msgstr ""
+
+msgctxt "#30013"
+msgid "Classic"
+msgstr ""
+
+msgctxt "#30014"
+msgid "Ask for confirmation before installing"
+msgstr ""
+
+msgctxt "#30015"
+msgid "Shows the download source."
+msgstr ""
+
+msgctxt "#30016"
+msgid "Update lists when opening Forja"
+msgstr ""
+
+msgctxt "#30017"
+msgid "Checks URL lists when Forja opens."
+msgstr ""
+
+msgctxt "#30018"
+msgid "Update lists in the background"
+msgstr ""
+
+msgctxt "#30019"
+msgid "A service refreshes URL lists while Kodi is open."
+msgstr ""
+
+msgctxt "#30020"
+msgid "Default list URL (optional)"
+msgstr ""
+
+msgctxt "#30021"
+msgid "Leave empty to use the built-in address."
+msgstr ""
+
+msgctxt "#30030"
+msgid "Require HTTPS for downloads"
+msgstr ""
+
+msgctxt "#30031"
+msgid "Blocks http:// sources."
+msgstr ""
+
+msgctxt "#30032"
+msgid "Require SHA-256 for external zips"
+msgstr ""
+
+msgctxt "#30033"
+msgid "Rejects external zips without a SHA-256 hash."
+msgstr ""
+
+msgctxt "#30034"
+msgid "Backups to keep per add-on"
+msgstr ""
+
+msgctxt "#30035"
+msgid "A copy is saved before replacing an add-on. 0 = none."
+msgstr ""
+
+msgctxt "#30036"
+msgid "Network timeout (seconds)"
+msgstr ""
+
+msgctxt "#30037"
+msgid "Seconds to wait for the server."
+msgstr ""
+
+msgctxt "#30040"
+msgid "Update all lists now"
+msgstr ""
+
+msgctxt "#30041"
+msgid "Delete temporary files and downloads"
+msgstr ""
+
+msgctxt "#30042"
+msgid "Restore the default list"
+msgstr ""
+
+msgctxt "#30043"
+msgid "Check for Forja updates now"
+msgstr ""
+
+msgctxt "#30050"
+msgid "Update Forja automatically in the background"
+msgstr ""
+
+msgctxt "#30051"
+msgid "Installs new Forja versions without asking."
+msgstr ""
+
+msgctxt "#30052"
+msgid "Require the latest version to open Forja"
+msgstr ""
+
+msgctxt "#30053"
+msgid "Installs updates before opening."
+msgstr ""
+
+msgctxt "#30054"
+msgid "Forja update URL (optional)"
+msgstr ""
+
+msgctxt "#30055"
+msgid "Leave empty to use the built-in address."
+msgstr ""
+
+msgctxt "#30060"
+msgid "Background"
+msgstr ""
+
+msgctxt "#30061"
+msgid "Hours between list updates"
+msgstr ""
+
+msgctxt "#30062"
+msgid "Interval for the background service."
+msgstr ""
+
+msgctxt "#30063"
+msgid "Hours between Forja update checks"
+msgstr ""
+
+msgctxt "#30064"
+msgid "Interval for the background service."
+msgstr ""
+
+msgctxt "#30070"
+msgid "Manage backups"
+msgstr ""

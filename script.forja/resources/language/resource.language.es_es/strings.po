@@ -1,0 +1,180 @@
+# Forja - cadenas de los ajustes
+msgid ""
+msgstr ""
+"Project-Id-Version: script.forja 1.0.0\n"
+"Language: es_ES\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+msgctxt "#30000"
+msgid "General"
+msgstr "General"
+
+msgctxt "#30001"
+msgid "Appearance and behaviour"
+msgstr "Aspecto y comportamiento"
+
+msgctxt "#30002"
+msgid "Lists and updates"
+msgstr "Listas y actualizaciones"
+
+msgctxt "#30003"
+msgid "Security"
+msgstr "Seguridad"
+
+msgctxt "#30004"
+msgid "Downloads and installation"
+msgstr "Descargas e instalación"
+
+msgctxt "#30005"
+msgid "Maintenance"
+msgstr "Mantenimiento"
+
+msgctxt "#30006"
+msgid "Tools"
+msgstr "Herramientas"
+
+msgctxt "#30010"
+msgid "Interface"
+msgstr "Interfaz"
+
+msgctxt "#30011"
+msgid "Modern: full screen. Classic: dialogs."
+msgstr "Moderna: pantalla completa. Clásica: cuadros de diálogo."
+
+msgctxt "#30012"
+msgid "Modern"
+msgstr "Moderna"
+
+msgctxt "#30013"
+msgid "Classic"
+msgstr "Clásica"
+
+msgctxt "#30014"
+msgid "Ask for confirmation before installing"
+msgstr "Pedir confirmación antes de instalar"
+
+msgctxt "#30015"
+msgid "Shows the download source."
+msgstr "Muestra el origen de la descarga."
+
+msgctxt "#30016"
+msgid "Update lists when opening Forja"
+msgstr "Actualizar las listas al abrir Forja"
+
+msgctxt "#30017"
+msgid "Checks URL lists when Forja opens."
+msgstr "Comprueba las listas con URL al abrir Forja."
+
+msgctxt "#30018"
+msgid "Update lists in the background"
+msgstr "Actualizar listas en segundo plano"
+
+msgctxt "#30019"
+msgid "A service refreshes URL lists while Kodi is open."
+msgstr "Un servicio actualiza las listas con URL mientras Kodi está abierto."
+
+msgctxt "#30020"
+msgid "Default list URL (optional)"
+msgstr "URL de la lista por defecto (opcional)"
+
+msgctxt "#30021"
+msgid "Leave empty to use the built-in address."
+msgstr "Vacío: se usa la dirección incluida."
+
+msgctxt "#30030"
+msgid "Require HTTPS for downloads"
+msgstr "Exigir HTTPS en las descargas"
+
+msgctxt "#30031"
+msgid "Blocks http:// sources."
+msgstr "Bloquea orígenes http://."
+
+msgctxt "#30032"
+msgid "Require SHA-256 for external zips"
+msgstr "Exigir SHA-256 en los zip externos"
+
+msgctxt "#30033"
+msgid "Rejects external zips without a SHA-256 hash."
+msgstr "Rechaza zips externos sin SHA-256."
+
+msgctxt "#30034"
+msgid "Backups to keep per add-on"
+msgstr "Copias de seguridad a conservar por addon"
+
+msgctxt "#30035"
+msgid "A copy is saved before replacing an add-on. 0 = none."
+msgstr "Se guarda una copia antes de reemplazar un addon. 0 = ninguna."
+
+msgctxt "#30036"
+msgid "Network timeout (seconds)"
+msgstr "Tiempo de espera de red (segundos)"
+
+msgctxt "#30037"
+msgid "Seconds to wait for the server."
+msgstr "Segundos de espera al servidor."
+
+msgctxt "#30040"
+msgid "Update all lists now"
+msgstr "Actualizar todas las listas ahora"
+
+msgctxt "#30041"
+msgid "Delete temporary files and downloads"
+msgstr "Borrar archivos temporales y descargas"
+
+msgctxt "#30042"
+msgid "Restore the default list"
+msgstr "Restaurar la lista por defecto"
+
+msgctxt "#30043"
+msgid "Check for Forja updates now"
+msgstr "Buscar actualizaciones de Forja ahora"
+
+msgctxt "#30050"
+msgid "Update Forja automatically in the background"
+msgstr "Actualizar Forja automáticamente en segundo plano"
+
+msgctxt "#30051"
+msgid "Installs new Forja versions without asking."
+msgstr "Instala las versiones nuevas de Forja sin preguntar."
+
+msgctxt "#30052"
+msgid "Require the latest version to open Forja"
+msgstr "Exigir la última versión para abrir Forja"
+
+msgctxt "#30053"
+msgid "Installs updates before opening."
+msgstr "Instala las actualizaciones antes de abrir."
+
+msgctxt "#30054"
+msgid "Forja update URL (optional)"
+msgstr "URL de actualizaciones de Forja (opcional)"
+
+msgctxt "#30055"
+msgid "Leave empty to use the built-in address."
+msgstr "Vacío: se usa la dirección incluida."
+
+msgctxt "#30060"
+msgid "Background"
+msgstr "Segundo plano"
+
+msgctxt "#30061"
+msgid "Hours between list updates"
+msgstr "Horas entre actualizaciones de listas"
+
+msgctxt "#30062"
+msgid "Interval for the background service."
+msgstr "Intervalo del servicio en segundo plano."
+
+msgctxt "#30063"
+msgid "Hours between Forja update checks"
+msgstr "Horas entre comprobaciones de Forja"
+
+msgctxt "#30064"
+msgid "Interval for the background service."
+msgstr "Intervalo del servicio en segundo plano."
+
+msgctxt "#30070"
+msgid "Manage backups"
+msgstr "Administrar copias de seguridad"
