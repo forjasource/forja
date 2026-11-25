@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<addon id="script.forja" name="Forja" version="1.1.0" provider-name="Forja">
+<addon id="script.forja" name="Forja" version="1.2.0" provider-name="Forja">
   <requires>
     <import addon="xbmc.python" version="3.0.0"/>
   </requires>
@@ -17,6 +17,7 @@
     <platform>all</platform>
     <license>GPL-3.0-or-later</license>
     <news>
+1.2.0: Limpieza
 1.1.0: Limpieza
 1.0.0: Test</news>
     <assets>
