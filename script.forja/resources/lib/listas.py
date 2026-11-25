@@ -24,7 +24,12 @@ class GestorListas:
             if lid != const.ID_DEFECTO and not os.path.exists(self._ruta(lid)):
                 e['listas'].pop(lid)
         e['orden'] = [x for x in e['orden'] if x in e['listas']]
+        self._rehacer = e.get('rev_catalogo') != const.REV_CATALOGO
+        if self._rehacer:
+            for meta in e['listas'].values():
+                meta['etag'] = meta['modificado'] = meta['actualizada'] = ''
         self._asegurar_defecto()
+        e['rev_catalogo'] = const.REV_CATALOGO
         for lid in e['listas']:
             if lid not in e['orden']:
                 e['orden'].append(lid)
@@ -62,7 +67,8 @@ class GestorListas:
             empaquetada = Lista.desde_json(f.read(), id_forzado=const.ID_DEFECTO)
         meta = self.estado['listas'].get(const.ID_DEFECTO)
         ruta = self._ruta(const.ID_DEFECTO)
-        escribir = meta is None or not os.path.exists(ruta)
+        escribir = meta is None or not os.path.exists(ruta) or (
+            self._rehacer and meta.get('origen', {}).get('tipo') == 'empaquetada')
         if not escribir and meta.get('origen', {}).get('tipo') == 'empaquetada' \
                 and not meta.get('etag') and not meta.get('modificado'):
             actual = leer_json(ruta, {}) or {}
