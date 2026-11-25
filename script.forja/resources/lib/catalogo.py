@@ -251,9 +251,6 @@ class Lista:
             if tipo == 'zip' and not e.zip:
                 avisos.append('«%s»: es de tipo zip pero no tiene URL; se ignora.' % e.id)
                 continue
-            if '{version}' in e.zip and not e.addon_xml:
-                avisos.append('«%s»: la URL usa {version} pero falta «addon_xml»; se ignora.' % e.id)
-                continue
             e.tipo = tipo
             et = _tomar(d, 'etiquetas', [])
             if isinstance(et, str):
@@ -266,9 +263,6 @@ class Lista:
                 rep = {'id': _texto(rep['id'], 120), 'zip': _texto(rep.get('zip') or rep.get('url') or '', 600),
                        'sha256': _texto(rep.get('sha256') or '', 80).lower(),
                        'addon_xml': _texto(rep.get('addon_xml') or rep.get('xml') or '', 600)}
-                if '{version}' in rep['zip'] and not rep['addon_xml']:
-                    avisos.append('«%s»: la URL del repositorio usa {version} pero falta «addon_xml»; se ignora el zip.' % e.id)
-                    rep['zip'] = ''
                 e.repositorio = {k: v for k, v in rep.items() if v}
             else:
                 e.repositorio = None
