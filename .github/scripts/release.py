@@ -7,6 +7,7 @@ import re
 import sys
 import zipfile
 from pathlib import Path
+from xml.sax.saxutils import escape
 
 RAIZ = Path(__file__).resolve().parents[2]
 CARPETA = 'script.forja'
@@ -63,6 +64,33 @@ def poner_version_en_addon_xml(version):
         print('addon.xml -> versión %s' % version)
 
 
+def poner_notas_en_addon_xml(version, notas):
+    notas = ' '.join(str(notas or '').split())
+    if not notas:
+        return
+    ruta = RAIZ / CARPETA / 'addon.xml'
+    texto = ruta.read_bytes().decode('utf-8')
+    m = re.search(r'(<news>)(.*?)(</news>)', texto, re.S)
+    if not m:
+        print('addon.xml no tiene <news>: no se añaden las notas')
+        return
+    linea = '%s: %s' % (version, escape(notas))
+    lineas = m.group(2).split('\n')
+    for i, viva in enumerate(lineas):
+        if viva.strip().startswith(version + ':'):
+            lineas[i] = linea
+            break
+    else:
+        k = 0
+        while k < len(lineas) and not lineas[k].strip():
+            k += 1
+        lineas.insert(k, linea)
+    nuevo = '\n'.join(lineas)
+    if nuevo != m.group(2):
+        ruta.write_bytes((texto[:m.start(2)] + nuevo + texto[m.end(2):]).encode('utf-8'))
+        print('addon.xml -> notas de la versión %s' % version)
+
+
 def construir_zip(huella, destino):
     carpeta = RAIZ / CARPETA
     with zipfile.ZipFile(destino, 'w', zipfile.ZIP_DEFLATED, compresslevel=9) as z:
@@ -104,6 +132,7 @@ def main():
         fallo('La versión de forja.json no es válida: %r (usa p. ej. 1.6.0)' % version)
 
     poner_version_en_addon_xml(version)
+    poner_notas_en_addon_xml(version, datos.get('notas'))
     huella = cargar_huella()
     contenido = huella.huella_arbol(str(RAIZ / CARPETA))
     nombre_zip = '%s-%s.zip' % (ID_ADDON, version)
