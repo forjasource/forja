@@ -87,7 +87,7 @@ class App:
             if solo is not None and e.id != solo:
                 continue
             if e.tipo == 'zip':
-                if e.addon_xml and e.id in self.instalados:
+                if (e.addon_xml or versiones.tiene_plantilla(e)) and e.id in self.instalados:
                     antes = versiones.version_conocida(e)
                     versiones.remota(e, forzar=forzar)
                     cambios = cambios or versiones.version_conocida(e) != antes
