@@ -1,7 +1,7 @@
 {
   "version": "1.0.0",
   "zip": "script.forja-1.0.0.zip",
-  "sha256": "8496bbce7155b0f0ca47a077c69e0095141382fc713549dd008ac1c620bb954f",
-  "contenido_sha256": "696a53320fc0f75bcc0b1951409a1a8e3a9112fd8248af0324542b9218b36bbd",
+  "sha256": "00b7f95010be2d53a49c7724e151d9f58ce4190b3d5280be3892091e6d2c037e",
+  "contenido_sha256": "72fae10bf9c0e3293ee2190fb6dfd32c93979a8134f0521ac499b2b068f63be7",
   "notas": "Test"
 }
