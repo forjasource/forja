@@ -34,7 +34,7 @@ def leer_manifiesto(timeout=10):
     if not isinstance(datos, dict):
         raise red.ErrorRed(T('err_forja_manifiesto'))
     version = str(datos.get('version') or '').strip()
-    zip_ = str(datos.get('zip') or '').strip()
+    zip_ = str(datos.get('zip') or '').strip() or '%s-%s.zip' % (const.ID, version)
     sha = str(datos.get('sha256') or '').strip().lower()
     contenido = str(datos.get('contenido_sha256') or '').strip().lower()
     if not version or not zip_ or not RE_SHA.match(sha):
