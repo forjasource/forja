@@ -111,7 +111,7 @@ def main():
 
     ya_publicado = (
         ruta_zip.exists()
-        and datos.get('zip') == nombre_zip
+        and 'zip' not in datos
         and datos.get('contenido_sha256') == contenido
         and datos.get('sha256') == sha256_archivo(ruta_zip)
     )
@@ -126,7 +126,7 @@ def main():
         sha = sha256_archivo(ruta_zip)
         resto = {k: v for k, v in datos.items()
                  if k not in ('version', 'zip', 'sha256', 'contenido_sha256')}
-        nuevo = {'version': version, 'zip': nombre_zip, 'sha256': sha, 'contenido_sha256': contenido}
+        nuevo = {'version': version, 'sha256': sha, 'contenido_sha256': contenido}
         nuevo.update(resto)
         ruta_json.write_bytes((json.dumps(nuevo, ensure_ascii=False, indent=2) + '\n').encode('utf-8'))
         print('Creado %s (sha256 %s)' % (nombre_zip, sha))
