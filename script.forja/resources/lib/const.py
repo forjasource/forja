@@ -24,6 +24,7 @@ ESQUEMA = 1
 
 URLS_DEFECTO = ('https://forjasource.github.io/addons/addons.json',)
 URL_ACTUALIZACION_FORJA = 'https://forjasource.github.io/forja/forja.json'
+REV_CATALOGO = 2
 ID_DEFECTO = 'defecto'
 ID_TODAS = '__todas__'
 
