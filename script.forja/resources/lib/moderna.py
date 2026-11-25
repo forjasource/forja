@@ -193,7 +193,7 @@ class VentanaForja(xbmcgui.WindowXML):
     def _cargar_descripcion(self, e):
         info = self.app.instalados.get(e.id)
         texto = self.app.desc.resolver(e, info)
-        if e.addon_xml:
+        if e.addon_xml or versiones.tiene_plantilla(e):
             versiones.remota(e)
         if self._cerrando:
             return
