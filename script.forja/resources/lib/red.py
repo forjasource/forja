@@ -128,6 +128,17 @@ def huella_remota(url):
     return res
 
 
+def existe(url, timeout=10):
+    url = validar_url(normalizar_url(url))
+    try:
+        with _abrir(_peticion(url, {'Range': 'bytes=0-0'}), _timeout(timeout)):
+            return True
+    except urllib.error.HTTPError as e:
+        return e.code not in (404, 410)
+    except Exception as e:
+        raise _traducir(e, url)
+
+
 def get_texto(url, **kw):
     datos, etag, mod = get_bytes(url, **kw)
     return (datos.decode('utf-8-sig', 'replace') if datos is not None else None), etag, mod
