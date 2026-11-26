@@ -178,3 +178,11 @@ msgstr ""
 msgctxt "#30070"
 msgid "Manage backups"
 msgstr ""
+
+msgctxt "#30071"
+msgid "Show the monthly top from Mundo Kodi"
+msgstr ""
+
+msgctxt "#30072"
+msgid "Adds a category with the best addons of the month, read from mundokodi.com."
+msgstr ""

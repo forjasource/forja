@@ -3,7 +3,7 @@ import xbmcgui
 
 import time
 
-from . import const, red, repos, sistema, versiones
+from . import const, red, repos, sistema, tops, versiones
 from .catalogo import ICONO_DEFECTO, Lista
 from .descripciones import Descripciones
 from .instalador import Instalador, Progreso
@@ -12,6 +12,7 @@ from .util import T, ajuste, dominio, log, sin_acentos, version_kodi, version_ma
 
 MAX_DEPS_VISIBLES = 8
 CAT_TODOS, CAT_INSTALADOS, CAT_ACTUALIZAR, CAT_PACKS = '__todos__', '__instalados__', '__actualizar__', '__packs__'
+CAT_TOP = '__top__'
 
 
 class App:
@@ -25,6 +26,7 @@ class App:
         self.sin_https = set()
         self._repos_vistos = {}
         self.desc = Descripciones()
+        self.top = tops.cargar_cache()
 
     def cargar(self):
         try:
@@ -35,7 +37,7 @@ class App:
             self.gestor.activar(const.ID_DEFECTO)
             self.lista = self.gestor.lista_activa()
         self.refrescar_instalados()
-        if self.categoria not in (CAT_TODOS, CAT_INSTALADOS, CAT_ACTUALIZAR, CAT_PACKS) and \
+        if self.categoria not in (CAT_TODOS, CAT_INSTALADOS, CAT_ACTUALIZAR, CAT_PACKS, CAT_TOP) and \
                 self.categoria not in {c['id'] for c in self.lista.categorias}:
             self.categoria = CAT_TODOS
 
@@ -155,11 +157,52 @@ class App:
             return T('origen_zip_corto') if corto else T('origen_zip', dominio=dominio(e.zip))
         return T('origen_kodi')
 
+    def top_activo(self):
+        return bool(ajuste('mostrar_top_mundokodi', True))
+
+    def top_pares(self):
+        if not self.top_activo():
+            return []
+        return tops.emparejar(self.top, self.entradas)
+
+    def actualizar_top(self, forzar=False):
+        if not self.top_activo():
+            return False
+        self.top, cambio = tops.actualizar(self.top, forzar)
+        return cambio
+
+    def top_vigente(self):
+        return not self.top_activo() or tops.vigente(self.top)
+
+    def nombre_visible(self, e):
+        if self.categoria == CAT_TOP:
+            for item, entrada in self.top_pares():
+                if entrada.id == e.id:
+                    return '%d. %s' % (item['pos'], e.nombre)
+        return e.nombre
+
+    def nota_top(self, e):
+        if self.categoria != CAT_TOP:
+            return ''
+        for item, entrada in self.top_pares():
+            if entrada.id == e.id:
+                partes = [T('top_nota', pos=item['pos'], periodo=tops.periodo(self.top))]
+                if item['descripcion']:
+                    partes.append(item['descripcion'])
+                if item['web']:
+                    partes.append(T('top_mas', web=item['web']))
+                return '\n'.join(partes)
+        return ''
+
     def categorias(self):
         ents = self.entradas
         n_inst = sum(1 for e in ents if e.id in self.instalados)
         n_act = sum(1 for e in ents if self.estado(e)[0] == 'actualizable')
         out = [{'id': CAT_TODOS, 'nombre': T('c_todos'), 'total': len(ents), 'icono': 'DefaultAddonsSearch.png'}]
+        n_top = len(self.top_pares())
+        if n_top:
+            out.append({'id': CAT_TOP, 'nombre': T('c_top', periodo=tops.periodo(self.top)), 'total': n_top,
+                        'icono': 'DefaultAddonsRecentlyUpdated.png'})
         n_packs = len(self.lista.packs)
         if n_packs:
             out.append({'id': CAT_PACKS, 'nombre': T('c_packs'), 'total': n_packs,
@@ -192,10 +235,15 @@ class App:
             ents = [e for e in ents if e.id in self.instalados]
         elif self.categoria == CAT_ACTUALIZAR:
             ents = [e for e in ents if self.estado(e)[0] == 'actualizable']
+        elif self.categoria == CAT_TOP:
+            ents = [e for _, e in self.top_pares()]
         elif self.categoria not in (CAT_TODOS, CAT_PACKS):
             ents = [e for e in ents if e.categoria == self.categoria]
         if self.busqueda:
             ents = self.lista.buscar(self.busqueda, ents)
+        if self.categoria == CAT_TOP:
+            orden = {e.id: i for i, (_, e) in enumerate(self.top_pares())}
+            return sorted(ents, key=lambda e: orden.get(e.id, 999))
         return sorted(ents, key=lambda e: sin_acentos(e.nombre))
 
     def packs_visibles(self):
@@ -525,6 +573,9 @@ class App:
         descripcion = descripcion or e.descripcion
         if descripcion:
             l += ['', descripcion]
+        nota = self.nota_top(e)
+        if nota:
+            l += ['', nota]
         xbmcgui.Dialog().textviewer(e.nombre, '\n'.join(l))
 
     def instalar_pack(self, pack):

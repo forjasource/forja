@@ -24,6 +24,9 @@ TEXTOS = {
     'quitar_conf': '¿Quitar este addon de la lista «{lista}»? No se desinstala de Kodi.',
 
     'c_todos': 'Todos', 'c_packs': 'Packs de instalación', 'c_instalados': 'Instalados',
+    'c_top': 'Top Mundo Kodi - {periodo}',
+    'top_nota': 'Puesto {pos} del Top de Mundo Kodi ({periodo}).',
+    'top_mas': 'Más información: {web}',
     'c_actualizaciones': 'Actualizaciones',
     'pack_desc': 'Pack de {n} addons',
 

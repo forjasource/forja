@@ -1,3 +1,4 @@
+import xbmc
 import xbmcgui
 
 from . import const, copias, gestion
@@ -61,6 +62,12 @@ def ejecutar(app):
 
 
 def _explorar(app):
+    if not app.top_vigente():
+        xbmc.executebuiltin('ActivateWindow(busydialognocancel)')
+        try:
+            app.actualizar_top()
+        finally:
+            xbmc.executebuiltin('Dialog.Close(busydialognocancel)')
     while True:
         cats = app.categorias()
         items = []
@@ -88,7 +95,7 @@ def _listar(app):
         items = []
         for e in ents:
             est, info = app.estado(e)
-            li = xbmcgui.ListItem(e.nombre, app.texto_estado(est) + (' - v' + info['version'] if info else ''))
+            li = xbmcgui.ListItem(app.nombre_visible(e), app.texto_estado(est) + (' - v' + info['version'] if info else ''))
             ic = app.icono(e)
             li.setArt({'icon': ic, 'thumb': ic})
             items.append(li)

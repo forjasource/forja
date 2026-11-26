@@ -59,6 +59,7 @@ class VentanaForja(xbmcgui.WindowXML):
         threading.Thread(target=self._vigilar_instalados, daemon=True).start()
         threading.Thread(target=self._vigilar_descripcion, daemon=True).start()
         threading.Thread(target=self._comprobar_repos, daemon=True).start()
+        threading.Thread(target=self._actualizar_top, daemon=True).start()
         if ajuste('actualizar_al_abrir', True):
             threading.Thread(target=self._actualizar_segundo_plano, daemon=True).start()
 
@@ -125,7 +126,7 @@ class VentanaForja(xbmcgui.WindowXML):
             for e in self._visibles:
                 est, info = app.estado(e)
                 sub = self._sub_version(e, est, info)
-                li = xbmcgui.ListItem(e.nombre, sub)
+                li = xbmcgui.ListItem(app.nombre_visible(e), sub)
                 li.setArt({'thumb': app.icono(e), 'icon': app.icono_respaldo(e)})
                 li.setProperty('tipo_item', 'addon')
                 li.setProperty('estado', est)
@@ -160,6 +161,9 @@ class VentanaForja(xbmcgui.WindowXML):
 
     def _texto_descripcion(self, e, info=None, texto=None):
         base = texto or self.app.desc.rapido(e, info) or e.descripcion or T('sin_descripcion')
+        nota = self.app.nota_top(e)
+        if nota:
+            base = nota + '\n\n' + base
         return (T('aviso_http') + '\n\n' if e.id in self.app.sin_https else '') + base
 
     def _vigilar_descripcion(self):
@@ -247,6 +251,14 @@ class VentanaForja(xbmcgui.WindowXML):
                 self._cat_aplicada = pos
                 self.getControl(ID_CATEGORIAS).selectItem(pos)
             self._rellenar_items()
+
+    def _actualizar_top(self):
+        try:
+            if self.app.actualizar_top() and not self._cerrando:
+                with self._lock:
+                    self._refrescar_todo(mantener=True)
+        except Exception as e:
+            log('Top de Mundo Kodi: %r' % e)
 
     def _comprobar_repos(self):
         try:

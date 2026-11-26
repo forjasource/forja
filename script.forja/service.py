@@ -33,6 +33,12 @@ def main():
                         log('Servicio: lista %s no actualizada (%s)' % (lid, e))
         except Exception as e:
             log('Servicio: %r' % e)
+        try:
+            if ajuste('mostrar_top_mundokodi', True):
+                from resources.lib import tops
+                tops.actualizar(tops.cargar_cache())
+        except Exception as e:
+            log('Servicio: top de Mundo Kodi: %r' % e)
         if monitor.waitForAbort(COMPROBAR_CADA):
             break
 
