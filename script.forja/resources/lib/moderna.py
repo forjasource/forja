@@ -1,3 +1,4 @@
+import contextlib
 import threading
 import time
 
@@ -37,6 +38,7 @@ class VentanaForja(xbmcgui.WindowXML):
         self._modo_packs = False
         self._lock = threading.RLock()
         self._ocupado = False
+        self._ultimo_fin = 0.0
         self._firma = None
         self._tarjetas = {}
         self._desc_pos = -1
@@ -250,6 +252,7 @@ class VentanaForja(xbmcgui.WindowXML):
                 self._rellenar_categorias()
                 self._cat_aplicada = pos
                 self.getControl(ID_CATEGORIAS).selectItem(pos)
+            self._marcar_categoria(pos)
             self._rellenar_items()
 
     def _actualizar_top(self):
@@ -357,7 +360,8 @@ class VentanaForja(xbmcgui.WindowXML):
             if cid == ID_PANEL:
                 self.setFocusId(ID_A_PRINCIPAL)
             elif cid == ID_A_PRINCIPAL:
-                self._principal()
+                if time.time() - self._ultimo_fin > 0.6:
+                    self._principal()
             elif cid == ID_CATEGORIAS:
                 self.setFocusId(ID_PANEL)
             elif cid == ID_A_MAS:
@@ -389,10 +393,25 @@ class VentanaForja(xbmcgui.WindowXML):
                 if copias.gestionar(self.app):
                     self._tras_cambio()
             elif cid == ID_B_ACT_TODO:
-                if self.app.actualizar_todo():
-                    self._tras_cambio()
+                with self._trabajando():
+                    if self.app.actualizar_todo():
+                        self._tras_cambio()
         except Exception as e:
             self._error(e)
+
+    @contextlib.contextmanager
+    def _trabajando(self):
+        self.setProperty('Forja.Ocupado', '1')
+        try:
+            yield
+        finally:
+            self.setProperty('Forja.Ocupado', '')
+            self._ultimo_fin = time.time()
+
+    def _marcar_categoria(self, pos):
+        ctl = self.getControl(ID_CATEGORIAS)
+        for i in range(len(self._cats)):
+            ctl.getListItem(i).setProperty('sel', '1' if i == pos and not self.app.busqueda else '')
 
     def _error(self, e):
         log('Error en la interfaz: %r' % e, xbmc.LOGERROR)
@@ -412,13 +431,14 @@ class VentanaForja(xbmcgui.WindowXML):
         item = self._actual()
         if item is None:
             return
-        if self._modo_packs:
-            self.app.instalar_pack(item)
-            self._tras_cambio()
-            return
-        clave, _ = self.app.accion_principal(item)
-        if self.app.ejecutar(item, clave):
-            self._tras_cambio()
+        with self._trabajando():
+            if self._modo_packs:
+                self.app.instalar_pack(item)
+                self._tras_cambio()
+                return
+            clave, _ = self.app.accion_principal(item)
+            if self.app.ejecutar(item, clave):
+                self._tras_cambio()
 
     def _menu_tarjeta(self):
         item = self._actual()
@@ -428,8 +448,9 @@ class VentanaForja(xbmcgui.WindowXML):
             xbmcgui.Dialog().textviewer(item['nombre'], item['descripcion'] + '\n\n' + '\n'.join(
                 '- %s' % e.nombre for e in self.app.entradas_de_pack(item)))
             return
-        if self.app.menu_contextual(item):
-            self._tras_cambio()
+        with self._trabajando():
+            if self.app.menu_contextual(item):
+                self._tras_cambio()
 
     def _info(self):
         item = self._actual()
@@ -454,8 +475,10 @@ class VentanaForja(xbmcgui.WindowXML):
             return
         sel = xbmcgui.Dialog().multiselect(T('lote_titulo'), [
             '%s  [%s]' % (e.nombre, app.lista.nombre_categoria(e.categoria)) for e in ents])
-        if sel and app.instalar_varios([ents[i] for i in sel]):
-            self._tras_cambio()
+        if sel:
+            with self._trabajando():
+                if app.instalar_varios([ents[i] for i in sel]):
+                    self._tras_cambio()
 
 
 def ejecutar(app):
